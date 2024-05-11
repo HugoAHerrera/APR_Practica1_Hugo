@@ -8,6 +8,7 @@ public class Load_Game : MonoBehaviour
 {
     public TMP_Dropdown Dropdown;
     public TMP_InputField nombreInputField;
+    private DB_Manager dbManager;
 
     public void CargarEscenaDeJuego()
     {
@@ -23,23 +24,10 @@ public class Load_Game : MonoBehaviour
         PlayerPrefs.SetString("NombreJugador", nombre);
         PlayerPrefs.Save();
         SceneManager.LoadScene("Juego");
-    }
 
-    public void descargarMarcado()
-    {
-        Debug.Log("Descarga de datos");
-    }
+        DB_Manager dbManager = FindObjectOfType<DB_Manager>();
+        dbManager.MeLlaman();
 
-    public void borrarHistorialJugador()
-    {
-        string nombre = nombreInputField.text;
-
-        if (string.IsNullOrEmpty(nombre))
-        {
-            Debug.Log("Escribe el nombre del jugador que quieres borrar los datos");
-            return; 
-        }
-        Debug.Log("Registros borrados del jugador " + nombre);
     }
 }
 
