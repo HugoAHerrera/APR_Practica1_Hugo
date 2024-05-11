@@ -14,6 +14,8 @@ public class Spawn_Enemies : MonoBehaviour
     {
         InvokeRepeating("SpawnEnemy", intervaloSpawn, intervaloSpawn);
         Instantiate(enemyPrefab, spawnPoints[0].position, Quaternion.identity);
+        string modo = PlayerPrefs.GetString("ModoSeleccionado", "");
+        Debug.Log("Modo seleccionado: " + modo + " - " + PlayerPrefs.GetString("NombreJugador", ""));
     }
 
     void SpawnEnemy()
