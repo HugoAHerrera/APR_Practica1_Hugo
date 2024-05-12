@@ -76,7 +76,7 @@ public class GameDB_Manager : MonoBehaviour
 
             IDbCommand dbCmd = dbConnection.CreateCommand();
             string sqlQuery = $"INSERT INTO Partidas (id_jugador, modo, tiempo_sobrevivido, hora_juego) " +
-                            $"VALUES ({idJugador}, '{modo}', '{tiempoSobrevivido} segundos', '{horaJuego}')";
+                            $"VALUES ({idJugador}, '{modo}', '{tiempoSobrevivido}', '{horaJuego}')";
             dbCmd.CommandText = sqlQuery;
             dbCmd.ExecuteNonQuery();
         }
