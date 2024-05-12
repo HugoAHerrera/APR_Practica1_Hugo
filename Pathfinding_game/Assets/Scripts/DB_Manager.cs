@@ -153,7 +153,7 @@ public class DB_Manager : MonoBehaviour
         using (IDbConnection dbConnection = CrearYAbrirBaseDeDatos()){
             int idJugador = ObtenerIdJugador(nombreJugador, dbConnection);
             IDbCommand dbCmd = dbConnection.CreateCommand();
-            string sqlQuery = $"INSERT INTO Intentos (id_jugador, numero_intentos) VALUES ({idJugador}, 1)";
+            string sqlQuery = $"INSERT INTO Intentos (id_jugador, numero_intentos, victorias, derrotas) VALUES ({idJugador}, 1, 0, 0)";
             dbCmd.CommandText = sqlQuery;
             dbCmd.ExecuteNonQuery();
         }
@@ -161,5 +161,3 @@ public class DB_Manager : MonoBehaviour
 
 
 }
-
-

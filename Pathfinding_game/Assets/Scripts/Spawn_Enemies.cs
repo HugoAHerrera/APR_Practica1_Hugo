@@ -8,14 +8,20 @@ public class Spawn_Enemies : MonoBehaviour
     public GameObject enemyPrefab;
     public Transform player;
     public Transform[] spawnPoints;
-    public float intervaloSpawn = 10f;
+    public float intervaloSpawn;
 
     void Start()
     {
+        string modo = PlayerPrefs.GetString("ModoSeleccionado", "");
+        if(modo == "Normal")
+        {
+            intervaloSpawn = 10f;
+        }else
+        {
+            intervaloSpawn = 5f;
+        }
         InvokeRepeating("SpawnEnemy", intervaloSpawn, intervaloSpawn);
         Instantiate(enemyPrefab, spawnPoints[0].position, Quaternion.identity);
-        string modo = PlayerPrefs.GetString("ModoSeleccionado", "");
-        Debug.Log("Modo seleccionado: " + modo + " - " + PlayerPrefs.GetString("NombreJugador", ""));
     }
 
     void SpawnEnemy()

@@ -1162,7 +1162,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 494751006}
         m_TargetAssemblyTypeName: DB_Manager, Assembly-CSharp
-        m_MethodName: descargarMarcado
+        m_MethodName: DescargarMarcador
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2747,7 +2747,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 494751006}
         m_TargetAssemblyTypeName: DB_Manager, Assembly-CSharp
-        m_MethodName: borrarHistorialJugador
+        m_MethodName: BorrarHistorialJugador
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

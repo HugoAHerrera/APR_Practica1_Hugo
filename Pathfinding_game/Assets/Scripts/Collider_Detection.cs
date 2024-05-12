@@ -5,11 +5,14 @@ using UnityEngine.SceneManagement;
 
 public class Collider_Detection : MonoBehaviour
 {
+    private GameDB_Manager GamedbManager;
+
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Personaje"))//Collisiona y es el jugador
+        if (other.CompareTag("Personaje"))
         {
-            //LLeva al menú
+            GameDB_Manager GamedbManager = FindObjectOfType<GameDB_Manager>();
+            GamedbManager.InsertarDerrota();
             SceneManager.LoadScene("Menu");
         }
     }
