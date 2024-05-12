@@ -26,8 +26,7 @@ public class Load_Game : MonoBehaviour
         SceneManager.LoadScene("Juego");
 
         DB_Manager dbManager = FindObjectOfType<DB_Manager>();
-        dbManager.MeLlaman();
-
+        dbManager.InsertarJugador();
     }
 }
 

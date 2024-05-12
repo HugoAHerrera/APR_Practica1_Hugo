@@ -59,7 +59,7 @@ public class DB_Manager : MonoBehaviour
         dbCmd.ExecuteReader();
     }
 
-    public void DescargarMarcado()
+    public void DescargarMarcador()
     {
         Debug.Log("Descarga de datos");
     }
@@ -73,10 +73,19 @@ public class DB_Manager : MonoBehaviour
             Debug.Log("Escribe el nombre del jugador que quieres borrar los datos");
             return; 
         }
+        using (IDbConnection dbConnection = CrearYAbrirBaseDeDatos())
+        {
+            int jugadorId = ObtenerIdJugador(nombre, dbConnection);
+            IDbCommand deleteCmd = dbConnection.CreateCommand();
+            deleteCmd.CommandText = $"DELETE FROM Jugadores WHERE nombre_jugador = '{nombre}';" +
+                             $"DELETE FROM Partidas WHERE id_jugador = {jugadorId};" +
+                             $"DELETE FROM Intentos WHERE id_jugador = {jugadorId};";
+            deleteCmd.ExecuteNonQuery();
+        }
         Debug.Log("Registros borrados del jugador " + nombre);
     }
 
-    public void MeLlaman()
+    public void InsertarJugador()
     {
         string nombreJugador = nombreInputField.text;
         if (VerificarJugadorExistente(nombreJugador))
