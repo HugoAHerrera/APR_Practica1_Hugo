@@ -186,13 +186,19 @@ public class DB_Manager : MonoBehaviour
         using (IDbConnection dbConnection = CrearYAbrirBaseDeDatos())
         {
             int jugadorId = ObtenerIdJugador(nombre, dbConnection);
-            IDbCommand deleteCmd = dbConnection.CreateCommand();
-            deleteCmd.CommandText = $"DELETE FROM Jugadores WHERE nombre_jugador = '{nombre}';" +
-                             $"DELETE FROM Partidas WHERE id_jugador = {jugadorId};" +
-                             $"DELETE FROM Intentos WHERE id_jugador = {jugadorId};";
-            deleteCmd.ExecuteNonQuery();
+            if(jugadorId == -1)
+            {
+                Debug.Log(nombre + " no tiene partidas registradas");
+            }else
+            {
+                IDbCommand deleteCmd = dbConnection.CreateCommand();
+                deleteCmd.CommandText = $"DELETE FROM Jugadores WHERE nombre_jugador = '{nombre}';" +
+                                $"DELETE FROM Partidas WHERE id_jugador = {jugadorId};" +
+                                $"DELETE FROM Intentos WHERE id_jugador = {jugadorId};";
+                deleteCmd.ExecuteNonQuery();
+                Debug.Log("Registros borrados del jugador " + nombre);
+            }
         }
-        Debug.Log("Registros borrados del jugador " + nombre);
     }
 
     public void InsertarJugador()
@@ -239,14 +245,24 @@ public class DB_Manager : MonoBehaviour
     {
         using (IDbConnection dbConn = CrearYAbrirBaseDeDatos())
         {
-            IDbCommand dbCmd = dbConnection.CreateCommand();
+            IDbCommand dbCmd = dbConn.CreateCommand();
             string sqlQuery = $"SELECT id FROM Jugadores WHERE nombre_jugador = '{nombreJugador}'";
             dbCmd.CommandText = sqlQuery;
-            IDataReader reader = dbCmd.ExecuteReader();
-            reader.Read();
-            return reader.GetInt32(0);
+            
+            using (IDataReader reader = dbCmd.ExecuteReader())
+            {
+                if (reader.Read())
+                {
+                    return reader.GetInt32(0);
+                }
+                else
+                {
+                    return -1;
+                }
+            }
         }
     }
+
 
     private void RegistrarJugador(string nombreJugador)
     {
