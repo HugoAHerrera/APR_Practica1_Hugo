@@ -25,5 +25,5 @@
   El jugador puede borar el historial de su cuenta introduciendo su nombre de usuario y pulsando en el botón borrar.
 ### JSON y XML:
   A los jugadores se les permite guardar los marcadores de todo el juego en formato XML y JSON, aquí se realiza una búsqueda que implica las 3 tablas.
-
+https://docs.google.com/document/d/1rHd60dD2ccyVs4TOELugY5lXDbV_59Y7N-j_ub_wjBQ/edit?usp=sharing
 # Hecho por: Hugo Andrés Herrera de Miguel
